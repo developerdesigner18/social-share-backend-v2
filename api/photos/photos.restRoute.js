@@ -14,7 +14,8 @@ import {
     deleteAlbum,
     deletePost,
     newCommunityPosts,
-    getPostMonthdata
+    getPostMonthdata,
+    updatePosts
 }
 
     from './photos.controller'
@@ -83,5 +84,6 @@ photosRouter.get("/showAllphotosOnly", showAllphotosOnly)
 photosRouter.get("/homePagePost", homePagePost)
 photosRouter.post("/deletePost", deletePost)
 photosRouter.post('/newPosts', uploadPostImg.array('Url', 12), newPosts)
+photosRouter.post('/updatePosts', uploadPostImg.array('Url', 12), updatePosts)
 photosRouter.post('/newCommunityPosts', uploadPostImg.array('Url', 12), newCommunityPosts)
 photosRouter.post('/getPostMonthData', getPostMonthdata)

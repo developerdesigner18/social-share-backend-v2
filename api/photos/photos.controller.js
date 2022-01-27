@@ -351,6 +351,46 @@ export const newPosts = async (req, res) => {
         res.status(422).send({ success: false, message: err.message });
     }
 };
+
+// Update Posts
+
+export const updatePosts = async (req, res) => {
+    try {
+        var imgFilesArray = [];
+        const img = req.files;
+        const exist = req.body.exist;
+        const URL =
+            (process.env.NODE_ENV === "development") ? "http://localhost:8000/post/" : "http://159.203.67.155:8000/post/";
+        // req.body.exist(element => {
+        //     imgFilesArray.push(element)
+        // })
+        console.log("req.body", req.body, exist)
+        if (req.body.exist) {
+            exist.split(',').forEach(element => {
+                imgFilesArray.push(element)
+            })
+        }
+        img.forEach((element) => {
+            var imgUrl = URL + element.filename;
+            imgFilesArray.push(imgUrl);
+        });
+        await photosList.updateOne({ "_id": req.body.post_id }, { $unset: { imageUrl: 1 } }).then(async () => {
+            await photosList.updateOne({ "_id": req.body.post_id }, { imageUrl: imgFilesArray, description: req.body.description, status: req.body.status }).then(() => {
+                return res.status(201).send({
+                    success: true,
+                    message: "post updated successfully.",
+                });
+            }).catch(err => {
+                res.send({ code: 404, success: false, error: err })
+            })
+        }).catch(err => {
+            res.send({ code: 404, success: false, error: err })
+        })
+
+    } catch (err) {
+        res.status(422).send({ success: false, message: err.message });
+    }
+};
 // Community Post
 export const newCommunityPosts = async (req, res) => {
     try {

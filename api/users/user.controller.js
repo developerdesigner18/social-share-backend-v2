@@ -2,9 +2,6 @@ import { Users } from './user.modal'
 import mongoose from 'mongoose'
 import configKey from '../../config'
 import jwt from 'jsonwebtoken';
-import { async } from 'regenerator-runtime';
-// import { resolve } from 'path/posix';
-// import { reject } from 'lodash';
 var _ = require('lodash');
 
 // get user profile by id
