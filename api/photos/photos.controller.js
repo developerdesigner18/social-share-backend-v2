@@ -462,7 +462,7 @@ export const Addcomment = async (req, res) => {
                         type: "comment",
                         userCommentId: userId,
                         userprofile: data.profileImgURl,
-                        content: data.name + " make comment: \"" + newcomment + "\" on your post",
+                        content: data.name + " made a comment: \"" + newcomment + "\" on your post",
                         phostImg: Pdata.imageUrl,
                         date: now
                     }
@@ -656,8 +656,8 @@ export const sharing = async (req, res) => {
                         usershareId: userId,
                         receiver: Rdata._id,
                         userprofile: data.profileImgURl,
-                        // content: data.name + " make share your post with: \"" + Rdata.name + "\"",
-                        content: data.name + " share your post with his/her timeline!",
+                        // content: data.name + " make shared your post with: \"" + Rdata.name + "\"",
+                        content: data.name + " shared your post on their timeline!",
                         phostImg: Pdata.imageUrl,
                         date: now
                     }
