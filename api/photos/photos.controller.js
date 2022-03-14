@@ -681,7 +681,7 @@ export const sharing = async (req, res) => {
         })
         return res.status(201).send({
             success: true,
-            message: 'share successfully'
+            message: 'post shared successfully'
         })
     } catch (err) {
         res.status(401).send({

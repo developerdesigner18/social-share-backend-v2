@@ -28,7 +28,7 @@ export const signup = async (req, res) => {
       if (isEmailExist) {
         return res
           .status(201)
-          .send({ success: true, message: "Email is already exist" });
+          .send({ success: true, message: "This Email Address already exists" });
       }
       console.log(bcrypt.hashSync(password))
       await Users.create({
@@ -49,7 +49,7 @@ export const signup = async (req, res) => {
           "Email: " + `${emailId}` + "\n" +
           "Password: " + `${password}` +
           "\n\n" +
-          "Please note: Do not share this credentails with anyone."
+          "Please note: Do not share the credentails with anyone."
       };
       await smtpTransport.sendMail(data, err => {
         return err ? res.status(422).send({
@@ -73,7 +73,7 @@ export const signup = async (req, res) => {
       if (ismobileNoExist) {
         return res
           .status(422)
-          .send({ success: false, message: "Mobile number is already exist" });
+          .send({ success: false, message: "This Mobile Number already exists" });
       }
       await Users.create({
         mobileNo,
@@ -174,7 +174,7 @@ export const forgotPassword = async (req, res) => {
     if (!isEmailExist) {
       return res
         .status(422)
-        .send({ success: false, message: "email in not registered" });
+        .send({ success: false, message: "this email is not registered" });
     }
     const mail = {
       emailId: email
@@ -185,10 +185,10 @@ export const forgotPassword = async (req, res) => {
     const data = {
       to: emailId,
       from: process.env.MAILER_EMAIL_ID,
-      subject: "Click Below Link To Reset Password ",
+      subject: "Click the Link below To Reset your Password ",
       text:
         "Confirm your email address to get started.\n\n" +
-        "Please click on the following link, or paste this into your browser to the reset password process:\n\n" +
+        "Please click on the following link, or paste this into your browser to reset your password:\n\n" +
         `${URL}/reset?token=` +
         token +
         "\n\n" +
