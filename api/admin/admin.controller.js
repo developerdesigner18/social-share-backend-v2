@@ -6,9 +6,9 @@ const path = require("path")
 export const getUsersList = async (req, res) => {
     try {
         const data = await Users.find({});
-        if (!data) {
-            console.log("users not found");
-        }
+        // if (!data) {
+        //     console.log("users not found");
+        // }
         res.status(201).send({
             success: true,
             message: 'Users List fetch successfully',
@@ -26,9 +26,9 @@ export const getUsersList = async (req, res) => {
 export const getPostsList = async (req, res) => {
     try {
         let data = await photosList.find({});
-        if (!data) {
-            console.log("Posts not found");
-        }        
+        // if (!data) {
+        //     console.log("Posts not found");
+        // }        
             res.status(201).send({
                 success: true,
                 message: 'Post List fetch successfully',
@@ -50,9 +50,9 @@ export const getCommunityPost = async (req, res) => {
         for(var c = 0; c < data.length; c++){
             main_data.push({id:data[c]._id, type: data[c].type, description: data[c].description, valid: new Date(data[c].valid).toDateString(), imageLength: data[c].imageUrl.length, commentLength: data[c].comment.length, shareLength: data[c].share.length, likeLength: data[c].like.length})
         }
-        if (!data) {
-            console.log("Posts not found");
-        }        
+        // if (!data) {
+        //     console.log("Posts not found");
+        // }        
             res.status(201).send({
                 success: true,
                 message: 'Post List fetch successfully',

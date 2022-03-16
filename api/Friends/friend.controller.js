@@ -37,9 +37,9 @@ export const allUser = async (req, res) => {
     // const {userId} = req.body
     // const decoded = await jwt.verify(req.headers.token, configKey.secrets.JWT_SECRET);
     const data = await Users.find({ _id: { $not: { $eq: userId } } }, { '_id': 1, 'name': 1, 'profileImgURl': 1 });
-    if (!data) {
-      console.log("data not found");
-    }
+    // if (!data) {
+    //   console.log("data not found");
+    // }
     res.status(201).send({
       success: true,
       message: 'List fetched successfully',
@@ -62,31 +62,60 @@ export const getFriendList = async (req, res) => {
     //fetch the data of friendList
     // var array = [];
     const data = await FriendList.findOne({ userId: userId });
-
     //check data fetched successfull or not
-    if (!data) {
-      res.status(201).send({
-        success: false,
-        message: 'No friends to show'
-      })
-    }
+    // if (!data || data == null) {
+    //   res.status(201).send({
+    //     success: false,
+    //     message: 'No friends to show'
+    //   })
+    // }
 
-    var array = [];
-    var list = data.friendList;
-    for (var i = 0; i < list.length; i++) {
-      const userData = await Users.findOne(
-        { _id: list[i].friendId },
-        { _id: 1, name: 1, profileImgURl: 1, content: 1, updatedAt: 1, chatStatus: 1 }
-      );
-      array.push(userData);
-    }
-    if (array.length > 0) {
-      //send fetched data list
-      res.status(201).send({
-        success: true,
-        message: 'List fetched successfully',
-        userInfo: array
-      })
+    // var array = [];
+    // var list = data.friendList;
+    // for (var i = 0; i < list.length; i++) {
+    //   const userData = await Users.findOne(
+    //     { _id: list[i].friendId },
+    //     { _id: 1, name: 1, profileImgURl: 1, content: 1, updatedAt: 1, chatStatus: 1 }
+    //   );
+    //   array.push(userData);
+    // }
+    // if (array.length > 0) {
+    //   //send fetched data list
+    //   res.status(201).send({
+    //     success: true,
+    //     message: 'List fetched successfully',
+    //     userInfo: array
+    //   })
+    // } else {
+    //   res.status(201).send({
+    //     success: false,
+    //     message: 'No friends to show',
+    //   })
+    // }
+
+    if(data !== null){
+      var array = [];
+      var list = data.friendList;
+      for (var i = 0; i < list.length; i++) {
+        const userData = await Users.findOne(
+          { _id: list[i].friendId },
+          { _id: 1, name: 1, profileImgURl: 1, content: 1, updatedAt: 1, chatStatus: 1 }
+        );
+        array.push(userData);
+      }
+      if (array.length > 0) {
+        //send fetched data list
+        res.status(201).send({
+          success: true,
+          message: 'List fetched successfully',
+          userInfo: array
+        })
+      } else {
+        res.status(201).send({
+          success: false,
+          message: 'No friends to show',
+        })
+      }
     } else {
       res.status(201).send({
         success: false,
@@ -228,7 +257,7 @@ export const showFriendRequetList = async (req, res) => {
     // })
     if (userFind.getRequest.length <= 0) {
       res.status(200).send({
-        success: true,
+        success: false,
         message: 'Not any friend request avilable'
       })
     } else {
@@ -379,7 +408,6 @@ export const AllSentRequest = async (req, res) => {
     const decoded = await jwt.verify(req.headers.token, configKey.secrets.JWT_SECRET);
     const data = await Users.findOne({ emailId: decoded.sub })
     const userId = data._id
-    console.log(userId);
     const userFind = await FriendList.findOne({ userId: userId });
 
     if (!userFind) {
@@ -390,6 +418,7 @@ export const AllSentRequest = async (req, res) => {
         sentRequest: []
       })
     }
+    console.log("userfind", userFind)
     res.status(200).send({
       success: true,
       message: 'List found',
@@ -431,16 +460,23 @@ export const showRequestedFriEndData = async (req, res) => {
     const userId = req.query.id
     var dataR = [];
     const Friend = await FriendList.findOne({ userId: userId })
-    var fList = Friend.getRequest;
-    for (var i = 0; i < fList.length; i++) {
-      var d = await Users.findById({ _id: fList[i].friendId }, { name: 1, profileImgURl: 1 })
-      dataR.push(d)
+    if(Friend !== null){
+      var fList = Friend.getRequest;
+      for (var i = 0; i < fList.length; i++) {
+        var d = await Users.findById({ _id: fList[i].friendId }, { name: 1, profileImgURl: 1 })
+        dataR.push(d)
+      }
+      res.status(200).send({
+        success: true,
+        message: 'List found',
+        list: dataR
+      })
+    } else {
+      res.status(201).send({
+        success: false,
+        message: 'Data not found'
+      })
     }
-    res.status(200).send({
-      success: true,
-      message: 'List found',
-      list: dataR
-    })
   }
   catch (err) {
     res.status(401).send({
@@ -461,20 +497,28 @@ export const allFriendsList = async (req, res) => {
     const userId = user._id;
     var array = [userId];
     const friendData = await FriendList.findOne({ userId: userId });
-    var fList = friendData.friendList;
-    for (var i = 0; i < fList.length; i++) {
-      array.push(fList[i].friendId);
+    if(friendData !== null){
+      var fList = friendData.friendList;
+      for (var i = 0; i < fList.length; i++) {
+        array.push(fList[i].friendId);
+      }
+      const data = await Users.find(
+        { _id: { $nin: array } },
+        { _id: 1, name: 1, profileImgURl: 1 }
+      );
+      res.status(200).send({
+        success: true,
+        message: "List fetched successfully",
+        AllUser: [data],
+      });
+    } else {
+      res.status(201).send({
+        success: false,
+        message: "Data is not available",
+      });
     }
-    const data = await Users.find(
-      { _id: { $nin: array } },
-      { _id: 1, name: 1, profileImgURl: 1 }
-    );
-    res.status(201).send({
-      success: true,
-      message: "List fetched successfully",
-      AllUser: [data],
-    });
   } catch (err) {
+    console.log("err", err)
     res.status(401).send({
       success: false,
       message: err.message,

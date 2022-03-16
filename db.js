@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import timestamps from 'mongoose-timestamp'
 import appConfig from "./config";
+import colors from 'colors'
 
 mongoose.Promise = global.Promise;
 mongoose.plugin(timestamps);
@@ -14,7 +15,7 @@ export const connect = (config = appConfig) => {
       { useUnifiedTopology: true,
         useNewUrlParser: true
       }
-    ).then(()=>{console.log("db connected")})
+    ).then(()=>{console.log("db connected".yellow.bold)})
     .catch((err)=>{console.log(err)}
     )
   };

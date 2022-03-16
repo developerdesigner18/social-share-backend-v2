@@ -212,7 +212,6 @@ async function aboutMe(userid, key, value) {
     }
 }
 async function deleteAboutMe(userid, key, value) {
-    console.log(key);
     await about.findOneAndUpdate({ userId: userid }, {
         $unset: { [key]: value }
     })
@@ -224,13 +223,9 @@ export const updateAbout = async (req, res) => {
         const user = await Users.findOne({ emailId: decoded.sub })
 
         const userId = user._id;
-        console.log(user._id);
         const info = req.body;
-        console.log(userId);
-        console.log(info);
         var key = Object.keys(info)[0]
         var value = Object.values(info)[0]
-        console.log(key, value);
 
         aboutMe(userId, key, value);
 
@@ -253,7 +248,6 @@ export const deleteAbout = async (req, res) => {
         const user = await Users.findOne({ emailId: decoded.sub })
         const userId = user._id;
         const info = req.body;
-        console.log(userId);
         var key = Object.keys(info)[0]
         var value = Object.values(info)[0]
         deleteAboutMe(userId, key, key, value);
@@ -280,7 +274,6 @@ export const getAboutData = async (req, res) => {
         // const decoded = await jwt.verify(req.headers.token, configKey.secrets.JWT_SECRET);
         const data = await about.find({ userId: userid });
         if (!data) {
-            console.log("data not found");
             res.status(201).send({
                 code: 401,
                 success: false,

@@ -1,5 +1,6 @@
 import http from "http"
 import { async } from "regenerator-runtime";
+import colors from 'colors'
 
 import app from "./server"
 const Chat = require("./api/chat/chat.modal");
@@ -120,8 +121,8 @@ io.on('connection', async (socket) => {
 
 server.listen(PORT, async () => {
     try {
-        console.log(`Server listening on port ${PORT}`)
+        console.log(`Server listening on port ${PORT}`.green)
     } catch (err) {
-        console.log("Server init error", err)
+        console.log("Server init error".red, err)
     }
 })

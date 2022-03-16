@@ -37,7 +37,6 @@ const localLogin = new LocalStrategy(
                     return done("Either Password or EmailId Doesn't match",false);
                 }
                 const validPassword = await bcrypt.compareSync(password, userExistence.password);
-                console.log(validPassword)
                 if(!validPassword){
                     return done("Password is Incorrect Please try Again later",false);
                 }
@@ -45,7 +44,6 @@ const localLogin = new LocalStrategy(
             }
         }
         catch(err){
-            console.log(err);
             return done("System was unable to process the details", false);
         }
     }
@@ -59,7 +57,6 @@ const jwtOptions = {
 }
 
 const jwtLogin = new JwtStrategy(jwtOptions, (jwt_payload, done)=>{
-    console.log("CHECKING LOGIN USING JWT");
     Users.findOne({emailId:jwt_payload.sub},
         (err, user)=>{
             if(err){

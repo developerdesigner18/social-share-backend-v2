@@ -92,7 +92,6 @@ export const updateUser = async (req, res) => {
 
 //live status
 export const updateStatus = async (req, res) => {
-    console.log("req", req)
     const userId = req.userId
     const content = req.status
     await Users.findByIdAndUpdate({ _id: userId }, { content: content })

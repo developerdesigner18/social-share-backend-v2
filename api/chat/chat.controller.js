@@ -54,9 +54,9 @@ export const updateMsg = async (req, res) => {
     try {
         const id = req.body.id
         const data = await ChatList.findByIdAndUpdate({ _id: id }, { status: 1 });
-        if (!data) {
-            console.log("data not found");
-        }
+        // if (!data) {
+        //     console.log("data not found");
+        // }
         res.status(201).send({
             success: true,
             message: 'Update successfully'
@@ -73,9 +73,9 @@ export const updateMsg = async (req, res) => {
 export const showstatusMsg = async (req, res) => {
     try {
         const data = await ChatList.find({ status: 0 });
-        if (!data) {
-            console.log("data not found");
-        }
+        // if (!data) {
+        //     console.log("data not found");
+        // }
         res.status(201).send({
             success: true,
             message: 'Data fetch successfully',

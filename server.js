@@ -5,6 +5,8 @@ import http from "http"
 import setupMiddware from './middlewares'
 import { authRouter } from './aurthorization'
 import { restRouter } from './api/restRouter'
+import colors from 'colors'
+import morgan from 'morgan'
 const app = express();
 
 require("dotenv").config()
@@ -14,6 +16,7 @@ setupMiddware(app)
 connect();
 
 app.use(cors());
+app.use(morgan('dev'));
 app.use('/auth', (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS")
