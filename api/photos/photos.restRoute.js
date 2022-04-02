@@ -38,7 +38,7 @@ var postStorage = multer.diskStorage({
             cb(null, postuploadDir)
         }
         else {
-            fs.mkdirSync(postuploadDir)
+            fs.mkdirSync(postuploadDir, { recursive: true })
             cb(null, postuploadDir)
         }
     },

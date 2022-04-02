@@ -27,7 +27,7 @@ var pstorage = multer.diskStorage({
             cb(null, profileUploadDir)
         }
         else {
-            fs.mkdirSync(profileUploadDir)
+            fs.mkdirSync(profileUploadDir, { recursive: true })
             cb(null, profileUploadDir)
         }
     },
@@ -47,7 +47,7 @@ var cstroge = multer.diskStorage({
             cb(null, coverUploaddir)
         }
         else {
-            fs.mkdirSync(coverUploaddir)
+            fs.mkdirSync(coverUploaddir, { recursive: true })
             cb(null, coverUploaddir)
         }
     },
