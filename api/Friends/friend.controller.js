@@ -422,7 +422,7 @@ export const AllSentRequest = async (req, res) => {
     res.status(200).send({
       success: true,
       message: 'List found',
-      list: userFind.sentRequest
+      list: userFind?.sentRequest
     })
   }
   catch (err) {

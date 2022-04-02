@@ -762,7 +762,7 @@ export const homePagePost = async (req, res) => {
             }
         }
         var userPost = await photosList.find({ userId: userId })
-
+        console.log('check data', homePost)
         if (userPost.length != 0) {
             for (var j = 0; j < userPost.length; j++) {
                 var location = await Users.findById({ _id: userPost[j].userId })
@@ -814,7 +814,47 @@ export const homePagePost = async (req, res) => {
                 message: "successfully.",
                 posts: sortedpost
             });
-        } else {
+        } else if(homePost.length > 0){
+            var sortedpost = homePost.sort(function (var1, var2) {
+                var a = new Date(var1.createdAt), b = new Date(var2.createdAt);
+                if (a > b)
+                    return -1;
+                if (a < b)
+                    return 1;
+                return 0;
+            });
+            for (var s = 0; s < sortedpost.length; s++) {
+                const temp = []
+                for (var h = 0; h < sortedpost[s].imageUrl.length; h++) {
+                    const t = { image: "", thumbImage: "", size: "" };
+                    if (sortedpost[s].imageUrl.length == 1) {
+                        t['size'] = 100
+                    }
+                    else if (sortedpost[s].imageUrl.length == 2 || sortedpost[s].imageUrl.length >= 4) {
+                        t['size'] = 50
+                    }
+                    else if (sortedpost[s].imageUrl.length == 3) {
+                        if (h == 0) {
+                            t['size'] = 100
+                        }
+                        else {
+                            t['size'] = 50
+                        }
+                    }
+
+                    t['image'] = sortedpost[s].imageUrl[h];
+                    t['thumbImage'] = sortedpost[s].imageUrl[h];
+                    temp.push(t);
+                }
+                sortedpost[s].imageUrl = temp
+            }
+            return res.status(201).send({
+                success: true,
+                message: "successfully.",
+                posts: sortedpost
+            });
+        }
+        else{
             res.status(201).send({
                 code: 401,
                 success: false,

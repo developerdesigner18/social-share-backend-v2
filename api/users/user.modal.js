@@ -14,7 +14,7 @@ const userSchema = Schema({
     hobbies: Array,
     profileImgURl: String,
     coverImgURl: String,
-    content: Number,
+    content: { type: Number, default: 0 },
     theme: String,
     chatStatus: Number,
     intro: String
