@@ -113,7 +113,7 @@ export const showalbumphotos = async (req, res) => {
         else {
             res.status(201).send({
                 success: false,
-                message: "Don't have any album.",
+                message: "Don't have any album yet",
             });
         }
     }
@@ -201,7 +201,7 @@ export const showAllphotosOnly = async (req, res) => {
             res.status(201).send({
                 code: 401,
                 success: false,
-                message: "Don't have any photos",
+                message: "Don't have any photos yet",
             });
         }
     }
