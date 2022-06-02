@@ -166,14 +166,14 @@ export const forgotPassword = async (req, res) => {
     const emailId = email.toLowerCase();
     const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (!emailRegexp.test(emailId)) {
-      return res.status(422).send({ success: false, message: "Invalid Email" });
+      return res.status(200).send({ success: false, message: "Invalid Email" });
     }
     const isEmailExist = await Users.findOne({ emailId: emailId }).then(data => {
       return data ? true : false;
     });
     if (!isEmailExist) {
       return res
-        .status(422)
+        .status(200)
         .send({ success: false, message: "this email is not registered" });
     }
     const mail = {
@@ -185,7 +185,7 @@ export const forgotPassword = async (req, res) => {
     const data = {
       to: emailId,
       from: process.env.MAILER_EMAIL_ID,
-      subject: "Click the Link below To Reset your Password ",
+      subject: "Click the Link below To Reset your Password",
       text:
         "Confirm your email address to get started.\n\n" +
         "Please click on the following link, or paste this into your browser to reset your password:\n\n" +
