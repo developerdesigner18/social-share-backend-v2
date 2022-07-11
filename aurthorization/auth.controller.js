@@ -24,13 +24,11 @@ export const signup = async (req, res) => {
     if (emailRegexp.test(email)) {
       const emailId = email.toLowerCase();
       const isEmailExist = await Users.findOne({ emailId: emailId });
-      console.log(isEmailExist);
       if (isEmailExist) {
         return res
           .status(201)
           .send({ success: true, message: "This Email Address already exists" });
       }
-      console.log(bcrypt.hashSync(password))
       await Users.create({
         emailId,
         name,
@@ -105,7 +103,6 @@ const expirationInterval =
 
 const tokenForUser = (user) => {
   try {
-    console.log(user.emailId)
     const timestamp = new Date().getTime();
     return jwt.sign(
       {
@@ -215,7 +212,6 @@ export const resetPassword = async (req, res) => {
   try {
     const token = req.query.token;
     const decoded = jwt.decode(token)
-    console.log(decoded);
     await Users.findOneAndUpdate(
       { emailId: decoded.sub },
       { password: bcrypt.hashSync(req.body.password) }

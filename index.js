@@ -58,7 +58,6 @@ const user = {}
 io.on('connection', async (socket) => {
 
     socket.on('login', (data) => {
-        // console.log("data", data)
         User.updateStatus(data)
         users[socket.id] = data.userId;
         socket.broadcast.emit("User_status", data.userId)
@@ -85,7 +84,6 @@ io.on('connection', async (socket) => {
     });
     //Someone is typing
     // socket.on("typing", (data) => {
-    //     console.log("data", data)
     //     socket.broadcast.emit('notifyTyping', data);
     //     // socket.in(data.recieverId).emit("notifyTyping", data);
     // });

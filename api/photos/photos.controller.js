@@ -113,7 +113,7 @@ export const showalbumphotos = async (req, res) => {
         else {
             res.status(201).send({
                 success: false,
-                message: "Don't have any album yet",
+                message: "You don't have any album yet.",
             });
         }
     }
@@ -133,7 +133,7 @@ export const deleteAlbum = async (req, res) => {
             if (err) {
                 return res.status(200).send({
                     success: false,
-                    message: "oops! something wrong",
+                    message: "oops! something went wrong",
                 });
             } else {
                 if (response.imageUrl) {
@@ -151,7 +151,7 @@ export const deleteAlbum = async (req, res) => {
                 }
                 return res.status(201).send({
                     success: true,
-                    message: "successfully.",
+                    message: "Album deleted successfully!.",
                 });
             }
         });
@@ -168,7 +168,7 @@ export const showAllphotosOnly = async (req, res) => {
     try {
         const userId = req.query.id
         const postData = await photosList.find({ userId: userId })
-        // console.log("=-=-=-=-=-=-=-=-=", postData[0].imageUrl);
+        // console.log("postData[0].imageUrl", postData[0].imageUrl);
         //check data fetched successfull or not
         if (!postData) {
             res.status(201).send({
@@ -201,7 +201,7 @@ export const showAllphotosOnly = async (req, res) => {
             res.status(201).send({
                 code: 401,
                 success: false,
-                message: "Don't have any photos yet",
+                message: "You don't have any photos yet.",
             });
         }
     }
@@ -282,7 +282,6 @@ export const showphotosprofile = async (req, res) => {
 //-------------------------------------------------- add new post
 export const newPosts = async (req, res) => {
     try {
-        console.log("req.body", req.body)
         const { location, description, askingPrice, category, name, type, status } = req.body;
         var imgFilesArray = [];
         const img = req.files;
@@ -334,7 +333,7 @@ export const newPosts = async (req, res) => {
                                 type: "new post",
                                 userPostId: userId,
                                 userprofile: data.profileImgURl,
-                                content: data.name + " has created new post",
+                                content: data.name + " " + "has created new post",
                                 phostImg: imgFilesArray,
                                 date: now,
                             },
@@ -364,7 +363,6 @@ export const updatePosts = async (req, res) => {
         // req.body.exist(element => {
         //     imgFilesArray.push(element)
         // })
-        console.log("req.body", req.body, exist)
         if (req.body.exist) {
             exist.split(',').forEach(element => {
                 imgFilesArray.push(element)
@@ -462,7 +460,7 @@ export const Addcomment = async (req, res) => {
                         type: "comment",
                         userCommentId: userId,
                         userprofile: data.profileImgURl,
-                        content: data.name + " made a comment: \"" + newcomment + "\" on your post",
+                        content: data.name + " " + "has made a comment: \"" + newcomment + "\" on your post",
                         phostImg: Pdata.imageUrl,
                         date: now
                     }
@@ -509,7 +507,7 @@ export const newBid = async (req, res) => {
                         type: "bid",
                         userBidId: userId,
                         userprofile: data.profileImgURl,
-                        content: data.name + "has bidded \"$" + newBid + "\" on your post",
+                        content: data.name + " " + "has bidded \"$" + newBid + "\" on your post",
                         phostImg: Pdata.imageUrl,
                         date: now
                     }
@@ -568,7 +566,7 @@ export const AddLike = async (req, res) => {
             }
         });
         if (temp == 1) {
-            console.log("already LIKEED");
+            console.log("already liked");
             await photosList.findByIdAndUpdate({ _id: postId }, {
                 $pull: { like: { userId: userId } }
             })
@@ -592,7 +590,7 @@ export const AddLike = async (req, res) => {
                             type: "like",
                             userLikedId: userId,
                             userprofile: data.profileImgURl,
-                            content: data.name + " has liked your photo",
+                            content: data.name + " " + "has liked your photo",
                             phostImg: Pdata.imageUrl,
                             status: 0,
                             date: now
@@ -657,7 +655,7 @@ export const sharing = async (req, res) => {
                         receiver: Rdata._id,
                         userprofile: data.profileImgURl,
                         // content: data.name + " make shared your post with: \"" + Rdata.name + "\"",
-                        content: data.name + " shared your post on their timeline!",
+                        content: data.name + " " + "shared your post on their timeline!",
                         phostImg: Pdata.imageUrl,
                         date: now
                     }
@@ -673,7 +671,7 @@ export const sharing = async (req, res) => {
                     usershareId: userId,
                     postId: Pdata._id,
                     userprofile: Pdata.profileImgURl,
-                    content: "You shared " + data.name + " post in your timeline.",
+                    content: "You shared" + " " + data.name + "\'s post in your timeline.",
                     phostImg: Pdata.imageUrl,
                     date: now
                 }
@@ -762,7 +760,6 @@ export const homePagePost = async (req, res) => {
             }
         }
         var userPost = await photosList.find({ userId: userId })
-        console.log('check data', homePost)
         if (userPost.length != 0) {
             for (var j = 0; j < userPost.length; j++) {
                 var location = await Users.findById({ _id: userPost[j].userId })
@@ -811,7 +808,7 @@ export const homePagePost = async (req, res) => {
             }
             return res.status(201).send({
                 success: true,
-                message: "successfully.",
+                message: "home feed posts fetched successfully.",
                 posts: sortedpost
             });
         } else if(homePost.length > 0){
@@ -858,7 +855,7 @@ export const homePagePost = async (req, res) => {
             res.status(201).send({
                 code: 401,
                 success: false,
-                message: "You don't have any posts",
+                message: "You don't have any posts yet.",
             });
         }
     }
@@ -921,7 +918,7 @@ export const deletePost = async (req, res) => {
             if (err) {
                 return res.status(200).send({
                     success: false,
-                    message: "oops! something wrong",
+                    message: "oops! something went wrong",
                 });
             } else {
                 if (response.imageUrl) {

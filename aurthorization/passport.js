@@ -24,7 +24,6 @@ const localLogin = new LocalStrategy(
                     return done("Either Password or EmailId Doesn't match",false);
                 }
                 const validPassword = await bcrypt.compareSync(password, userExistence.password);
-                //console.log(validPassword)
                 if(!validPassword){
                     return done("Password is Incorrect Please try Again later",false);
                 }
@@ -32,7 +31,6 @@ const localLogin = new LocalStrategy(
             }
             else if(mobileNoRegexp.test(email)){
                 const userExistence = await Users.findOne({mobileNo:email})
-                //console.log(userExistence)
                 if(!userExistence){
                     return done("Either Password or EmailId Doesn't match",false);
                 }

@@ -418,7 +418,6 @@ export const AllSentRequest = async (req, res) => {
         sentRequest: []
       })
     }
-    console.log("userfind", userFind)
     res.status(200).send({
       success: true,
       message: 'List found',

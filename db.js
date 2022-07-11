@@ -15,7 +15,7 @@ export const connect = (config = appConfig) => {
       { useUnifiedTopology: true,
         useNewUrlParser: true
       }
-    ).then(()=>{console.log("db connected".yellow.bold)})
-    .catch((err)=>{console.log(err)}
+    ).then(()=>{console.log("DB CONNECTED".yellow.bold)})
+    .catch((err)=>{console.log(`ERROR ::: ${err}`.red.bold)}
     )
   };
