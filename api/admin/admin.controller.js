@@ -76,7 +76,7 @@ export const deletePost = async (req, res) => {
             if (err) {
                 return res.status(200).send({
                     success: false,
-                    message: "oops! something wrong",
+                    message: "oops! something went wrong",
                 });
             } else {
                 if (response.imageUrl) {
