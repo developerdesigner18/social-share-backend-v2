@@ -3,7 +3,7 @@ import cors from "cors";
 import { connect } from './db'
 import http from "http"
 import setupMiddware from './middlewares'
-import { authRouter } from './aurthorization'
+import { authRouter } from './authorization'
 import { restRouter } from './api/restRouter'
 import colors from 'colors'
 import morgan from 'morgan'

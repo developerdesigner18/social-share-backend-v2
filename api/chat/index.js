@@ -1,2 +1,2 @@
-export * from './chat.modal';
-export * from './chat.restRoute'
+export * from './chat.model';
+export * from './chat.restRouter'

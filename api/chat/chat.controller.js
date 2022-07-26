@@ -1,9 +1,8 @@
-import { ChatList } from './chat.modal'
-import { Users } from '../users/user.modal'
+import { ChatList } from './chat.model'
+import { Users } from '../users/user.model'
 import jwt from 'jsonwebtoken';
 import configKey from '../../config'
 import mongoose from 'mongoose'
-
 
 //Insert message
 export const insertMsg = async (req, res) => {

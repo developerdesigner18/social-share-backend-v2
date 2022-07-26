@@ -16,7 +16,7 @@ import path from 'path';
 import fs from 'fs';
 import configKey from '../../config'
 import jwt from 'jsonwebtoken';
-import { Users } from "./user.modal";
+import { Users } from "./user.model";
 import { decode } from "querystring";
 export const userRouter = express.Router();
 

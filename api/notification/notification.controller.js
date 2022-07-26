@@ -1,19 +1,16 @@
-import { notificationList } from './notification.modal'
-import { Users } from '../users/user.modal'
+import { notificationList } from './notification.model'
+import { Users } from '../users/user.model'
 import jwt from 'jsonwebtoken';
 import configKey from '../../config'
 //------------------------------------------------------------------show notification
 
 export const getnotification = async (req, res) => {
     try {
-
         const { userId } = req.body
-
         const userData = await notificationList.findOne({ userId: userId })
-        
         if (userData !== null) {
             const notificationData = userData.notification
-            if(notificationData.length > 0){
+            if (notificationData.length > 0) {
                 res.status(201).send({
                     success: true,
                     message: notificationData.reverse()

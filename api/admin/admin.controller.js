@@ -1,5 +1,5 @@
-import { Users } from '../users/user.modal'
-import { photosList } from '../photos/photos.modal'
+import { Users } from '../users/user.model'
+import { photosList } from '../photos/photos.model'
 const path = require("path")
 
 // get all Users Info
@@ -29,13 +29,13 @@ export const getPostsList = async (req, res) => {
         // if (!data) {
         //     console.log("Posts not found");
         // }        
-            res.status(201).send({
-                success: true,
-                message: 'Post List fetch successfully',
-                data: data,
-                length: data.length
-            })
-        
+        res.status(201).send({
+            success: true,
+            message: 'Post List fetch successfully',
+            data: data,
+            length: data.length
+        })
+
     } catch (err) {
         res.status(401).send({
             success: false,
@@ -47,19 +47,19 @@ export const getCommunityPost = async (req, res) => {
     try {
         let data = await photosList.find({ $or: [{ type: 'community' }, { type: 'promotion' }] });
         var main_data = []
-        for(var c = 0; c < data.length; c++){
-            main_data.push({id:data[c]._id, type: data[c].type, description: data[c].description, valid: new Date(data[c].valid).toDateString(), imageLength: data[c].imageUrl.length, commentLength: data[c].comment.length, shareLength: data[c].share.length, likeLength: data[c].like.length})
+        for (var c = 0; c < data.length; c++) {
+            main_data.push({ id: data[c]._id, type: data[c].type, description: data[c].description, valid: new Date(data[c].valid).toDateString(), imageLength: data[c].imageUrl.length, commentLength: data[c].comment.length, shareLength: data[c].share.length, likeLength: data[c].like.length })
         }
         // if (!data) {
         //     console.log("Posts not found");
         // }        
-            res.status(201).send({
-                success: true,
-                message: 'Post List fetch successfully',
-                main_data: main_data,
-                length: data.length
-            })
-        
+        res.status(201).send({
+            success: true,
+            message: 'Post List fetch successfully',
+            main_data: main_data,
+            length: data.length
+        })
+
     } catch (err) {
         res.status(401).send({
             success: false,

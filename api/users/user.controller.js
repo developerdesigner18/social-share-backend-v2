@@ -1,4 +1,4 @@
-import { Users } from './user.modal'
+import { Users } from './user.model'
 import mongoose from 'mongoose'
 import configKey from '../../config'
 import jwt from 'jsonwebtoken';

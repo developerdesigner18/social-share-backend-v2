@@ -1,5 +1,5 @@
-import { FriendList } from './friend.modal'
-import { Users } from '../users/user.modal'
+import { FriendList } from './friend.model'
+import { Users } from '../users/user.model'
 import jwt from 'jsonwebtoken';
 import configKey from '../../config'
 
@@ -93,7 +93,7 @@ export const getFriendList = async (req, res) => {
     //   })
     // }
 
-    if(data !== null){
+    if (data !== null) {
       var array = [];
       var list = data.friendList;
       for (var i = 0; i < list.length; i++) {
@@ -459,7 +459,7 @@ export const showRequestedFriEndData = async (req, res) => {
     const userId = req.query.id
     var dataR = [];
     const Friend = await FriendList.findOne({ userId: userId })
-    if(Friend !== null){
+    if (Friend !== null) {
       var fList = Friend.getRequest;
       for (var i = 0; i < fList.length; i++) {
         var d = await Users.findById({ _id: fList[i].friendId }, { name: 1, profileImgURl: 1 })
@@ -496,7 +496,7 @@ export const allFriendsList = async (req, res) => {
     const userId = user._id;
     var array = [userId];
     const friendData = await FriendList.findOne({ userId: userId });
-    if(friendData !== null){
+    if (friendData !== null) {
       var fList = friendData.friendList;
       for (var i = 0; i < fList.length; i++) {
         array.push(fList[i].friendId);

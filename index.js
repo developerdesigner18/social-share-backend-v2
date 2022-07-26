@@ -3,7 +3,7 @@ import { async } from "regenerator-runtime";
 import colors from 'colors'
 
 import app from "./server"
-const Chat = require("./api/chat/chat.modal");
+const Chat = require("./api/chat/chat.model");
 const Pusher = require('pusher')
 const User = require('./api/users/user.controller')
 let server = null;

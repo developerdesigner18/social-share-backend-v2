@@ -2,8 +2,8 @@ import express from 'express'
 import {
     getTimeline,
     setTimeline
-} from './timline.controller'
+} from './timeline.controller'
 export const timelineRouter = express.Router();
 
-timelineRouter.get("/",getTimeline);
-timelineRouter.post("/send",setTimeline);
+timelineRouter.get("/", getTimeline);
+timelineRouter.post("/send", setTimeline);

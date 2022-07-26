@@ -1,2 +1,2 @@
-export * from './about.modal';
-export * from './about.restRoute'
+export * from './about.model';
+export * from './about.restRouter'

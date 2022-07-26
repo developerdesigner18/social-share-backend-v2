@@ -25,7 +25,7 @@ import fs from 'fs';
 import jwt from 'jsonwebtoken';
 import configKey from '../../config'
 import { Users } from '../users'
-import { photosList } from "./photos.modal";
+import { photosList } from "./photos.model";
 import MimeNode from "nodemailer/lib/mime-node";
 
 export const photosRouter = express.Router();

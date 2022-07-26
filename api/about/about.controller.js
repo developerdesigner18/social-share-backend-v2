@@ -1,6 +1,6 @@
-import { Users } from '../users/user.modal'
-import { notificationList } from '../notification/notification.modal'
-import { about } from './about.modal'
+import { Users } from '../users/user.model'
+import { notificationList } from '../notification/notification.model'
+import { about } from './about.model'
 import jwt from 'jsonwebtoken';
 import configKey from '../../config'
 import mongoose from 'mongoose'

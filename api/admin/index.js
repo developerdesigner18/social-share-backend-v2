@@ -1,1 +1,1 @@
-export * from './admin.restRoute'
+export * from './admin.restRouter'

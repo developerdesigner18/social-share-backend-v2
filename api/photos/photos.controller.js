@@ -1,7 +1,7 @@
-import { photosList } from './photos.modal'
-import { Users } from '../users/user.modal'
-import { FriendList } from '../Friends/friend.modal'
-import { notificationList } from '../notification/notification.modal'
+import { photosList } from './photos.model'
+import { Users } from '../users/user.model'
+import { FriendList } from '../friends/friend.model'
+import { notificationList } from '../notification/notification.model'
 import jwt from 'jsonwebtoken';
 import path from 'path';
 import fs from 'fs';
@@ -811,7 +811,7 @@ export const homePagePost = async (req, res) => {
                 message: "home feed posts fetched successfully.",
                 posts: sortedpost
             });
-        } else if(homePost.length > 0){
+        } else if (homePost.length > 0) {
             var sortedpost = homePost.sort(function (var1, var2) {
                 var a = new Date(var1.createdAt), b = new Date(var2.createdAt);
                 if (a > b)
@@ -851,7 +851,7 @@ export const homePagePost = async (req, res) => {
                 posts: sortedpost
             });
         }
-        else{
+        else {
             res.status(201).send({
                 code: 401,
                 success: false,

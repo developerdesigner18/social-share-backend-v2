@@ -1,2 +1,2 @@
-export * from './notification.modal';
+export * from './notification.model';
 export * from './notification.restRouter';

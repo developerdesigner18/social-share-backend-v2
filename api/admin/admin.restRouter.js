@@ -12,5 +12,3 @@ adminRouter.get("/getAllUsers", getUsersList)
 adminRouter.get("/getAllPosts", getPostsList)
 adminRouter.get("/getAllCommunityPosts", getCommunityPost)
 adminRouter.post("/deletecommunityPost", deletePost)
-
-

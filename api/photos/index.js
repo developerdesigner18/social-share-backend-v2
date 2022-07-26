@@ -1,2 +1,2 @@
-export * from './photos.modal';
-export * from './photos.restRoute';
+export * from './photos.model';
+export * from './photos.restRouter';

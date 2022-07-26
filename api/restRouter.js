@@ -1,8 +1,8 @@
 import express from 'express'
 import { userRouter } from './users'
-import { friendRouter } from './Friends'
+import { friendRouter } from './friends'
 import { photosRouter } from './photos'
-import { notificationRouter } from './notification/notification.restRoute';
+import { notificationRouter } from './notification/notification.restRouter';
 import { aboutRouter } from './about'
 import { chatRouter } from './chat'
 import { adminRouter } from './admin'
