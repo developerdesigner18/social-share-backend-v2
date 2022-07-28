@@ -40,10 +40,10 @@ export const signup = async (req, res) => {
       const data = {
         to: emailId,
         from: process.env.MAILER_EMAIL_ID,
-        subject: "Registration done with Social Share.",
+        subject: "Registration done with GamerzNet.",
         text:
-          "Welcome to the Social Share Family.\n\n" +
-          "Here below is your Social Share Credentials:\n" +
+          "Welcome to the GamerzNet Family.\n\n" +
+          "Here below is your GamerzNet Credentials:\n" +
           "Email: " + `${emailId}` + "\n" +
           "Password: " + `${password}` +
           "\n\n" +

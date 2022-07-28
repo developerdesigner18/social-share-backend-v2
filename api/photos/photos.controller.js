@@ -727,13 +727,13 @@ export const homePagePost = async (req, res) => {
         if (Friend == null) {
             res.status(201).send({
                 success: true,
-                message: "You don't have any Social Share friends yet. Please add some friends to view their posts on your feed."
+                message: "You don't have any GamerzNet friends yet. Please add some friends to view their posts on your feed."
             })
         }
         if (!Friend) {
             res.status(201).send({
                 success: false,
-                message: "You don't have any Social Share friends yet. Please add some friends to view their posts on your feed."
+                message: "You don't have any GamerzNet friends yet. Please add some friends to view their posts on your feed."
             })
         }
         var fList = Friend.friendList;

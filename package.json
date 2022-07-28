@@ -1,12 +1,12 @@
 {
-  "name": "social-share-server",
+  "name": "gamerz-net-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "babel-node -- ./index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "devstart": "nodemon --exec ./node_modules/.bin/babel-node -- ./index.js"
+    "dev": "nodemon --exec ./node_modules/.bin/babel-node -- ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
